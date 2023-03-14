@@ -1,5 +1,5 @@
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 t_token	*ft_new_token(char *str)
 {

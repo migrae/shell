@@ -92,5 +92,6 @@ char	**lexer(char *str)
 	create_strings(split, str);
 	split[strnumber] = NULL;
 	free(str);
+	ft_put2dstr_fd(split, 2);
 	return (split);
 }

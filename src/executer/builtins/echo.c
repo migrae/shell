@@ -15,6 +15,8 @@ void	ft_echo(t_exec *exec)
 	end = 0;
 	while (exec->args[end])
 		end++;
+	if(!exec->args[1])
+		exit(EXIT_FAILURE);
 	if (ft_strncmp(exec->args[1], "-n", 3) == 0)
 	{
 		out = ft_strjoin_s_e(exec->args, 2, end - 1, " ");

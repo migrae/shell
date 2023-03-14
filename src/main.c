@@ -39,6 +39,7 @@ int main (int args, char **argv, char **env)
 			add_history(input);
 		if (!load_tokens(lexer(input), data))
 			return (free_data(data), EXIT_FAILURE);
+		print_tokens(&data->tokens);
 		if (!parse_tokens(data))
 			return (free_data(data), EXIT_FAILURE);
 		expander(data->execs, data->env);

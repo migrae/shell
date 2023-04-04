@@ -14,7 +14,7 @@ int	create_child(t_exec *exec, t_data *data, int *fd_pipe, int fd_keep_pipe)
 		wrong_command(exec);
 		built_in_child(exec, &data->env, data);
 		if (execve(exec->command, exec->args, data->env) == -1)
-			command_not_found(exec->command);
+			command_not_found(exec->command, data);
 	}
 	if (close(fd_pipe[1]) == -1)
 		perror ("close pipe[1]");

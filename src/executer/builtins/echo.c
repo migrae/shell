@@ -43,7 +43,7 @@ void	out_echo_str(char **args, char **env, char *out, int end)
 			return (ft_putstr_fd("", 1), (void) NULL);
 		if (ft_2darraylen(args) > 2)
 			out = ft_strjoin_s_e(args, option_detect(args),
-					end - 1, " ");
+					end, " ");
 		out = look_for_dollar(out, env);
 		out = quote_cutter(out);
 		ft_putstr_fd(out, 1);
@@ -52,7 +52,7 @@ void	out_echo_str(char **args, char **env, char *out, int end)
 	{
 		if (!args[1])
 			return (ft_putendl_fd("", 1), (void) NULL);
-		out = ft_strjoin_s_e(args, 1, end - 1, " ");
+		out = ft_strjoin_s_e(args, 1, end, " ");
 		out = look_for_dollar(out, env);
 		out = quote_cutter(out);
 		ft_putendl_fd(out, 1);

@@ -40,7 +40,7 @@ int	keep_dollar(char *str)
 	return (0);
 }
 
-void	command_not_found(char *s)
+void	command_not_found(char *s, t_data *data)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(s, 2);
@@ -48,19 +48,25 @@ void	command_not_found(char *s)
 	{
 		ft_putstr_fd(": is a directory\n", 2);
 		if (ft_strncmp(s, "/bin/", 6) == 0)
+		{
+			free_data(data);
 			exit (126);
+		}
+		free_data(data);
 		exit(127);
 	}
 	if (ft_strncmp(s, "./", 2) == 0 || ft_strncmp(s, "/", 1) == 0)
 	{
 		ft_putstr_fd(": No such file or directory\n", 2);
+		free_data(data);
 		exit (127);
 	}
 	ft_putstr_fd(": command not found\n", 2);
+	free_data(data);
 	exit(127);
 }
 
-t_exec	*go_through_exec(t_exec *exec, char **env)
+t_exec	*go_through_exec(t_exec *exec, char **env, t_data *data)
 {
 	char	*tmp;
 
@@ -71,7 +77,7 @@ t_exec	*go_through_exec(t_exec *exec, char **env)
 		tmp = exec->args[0];
 		exec->args[0] = quote_cutter(exec->command);
 		if (!exec->args[0][0])
-			command_not_found(exec->command);
+			command_not_found(exec->command, data);
 		free(tmp);
 		exec->command = ft_strdup(exec->args[0]);
 		exec->command = get_path(exec->command, env);

@@ -44,7 +44,7 @@ t_exec	*expand(t_exec *exec, char **env)
 	return (exec);
 }
 
-t_exec	**expander(t_exec **exec, char **env)
+t_exec	**expander(t_exec **exec, char **env, t_data *data)
 {
 	int	i;
 
@@ -54,7 +54,7 @@ t_exec	**expander(t_exec **exec, char **env)
 		if (exec[i]->command && ft_strncmp(exec[i]->command, "echo", 5) != 0
 			&& ft_strncmp(exec[i]->command, "/bin/echo", 10) != 0)
 		{
-			if (!go_through_exec(exec[i], env))
+			if (!go_through_exec(exec[i], env, data))
 				return (NULL);
 		}
 		i++;

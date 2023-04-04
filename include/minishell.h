@@ -157,7 +157,7 @@ int			error_codes(int pid);
 void		wrong_command(t_exec *exec);
 void		handle_sigquit(int sig);
 void		signals_child(void);
-void		command_not_found(char *s);
+void		command_not_found(char *s, t_data *data);
 
 //builtins
 int			built_in(t_exec *exec, char ***env, t_data *data);
@@ -214,7 +214,7 @@ char		**replace_in_env(char *category, char *new_entry, char **env);
 int			category_is_in_env(char *category, char **env);
 
 //expander
-t_exec		**expander(t_exec **exec, char **env);
+t_exec		**expander(t_exec **exec, char **env, t_data *data);
 char		*take_content(char *declaration);
 char		*search_var_in_env(char *var, char **env);
 void		search_array(char **arr, char **env);
@@ -225,7 +225,7 @@ char		*ft_replace_var(char **env, char *dollar);
 char		*string_split(char *str, char c, int at_first, int first);
 char		*minimize_whitespace(char *str);
 t_exec		*expand(t_exec *exec, char **env);
-t_exec		*go_through_exec(t_exec *exec, char **env);
+t_exec		*go_through_exec(t_exec *exec, char **env, t_data *data);
 int			look_for_singlequote(char *str, int *flag);
 char		**replace_args(char **c_args, char **args, int exp_cycle);
 char		**mini_lexer(char *str);

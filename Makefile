@@ -46,17 +46,13 @@ $(DOWNLOADFOLDER):
 	make -C $(DOWNLOADFOLDER)/readline-8.1.2
 	make install -C $(DOWNLOADFOLDER)/readline-8.1.2
 
-LSAN = LeakSanitizer
 LSANLIB = /LeakSanitizer/liblsan.a
 lsan: CFLAGS += -ILeakSanitizer -Wno-gnu-include-next
-lsan: LINK += $(LSANLFLAGS)
+lsan: LINK += -LLeakSanitizer -llsan -lc++
 lsan: fclean $(LSANLIB)
 lsan: all
-
-$(LSAN):
-	git clone https://github.com/mhahnFr/LeakSanitizer.git
-
-$(LSANLIB): $(LSAN)
-	$(MAKE) -C LeakSanitizer
+$(LSANLIB):
+	@if [ ! -d "LeakSanitizer" ]; then git clone https://github.com/mhahnFr/LeakSanitizer.git; fi
+	@$(MAKE) -C LeakSanitizer
 
 .PHONY: all, run, clean, fclean, re
